@@ -1,33 +1,27 @@
 #include "stm32f10x.h"                  // Device header
 #include "Delay.h"
-#include "LED.h"
-#include "Key.h"
+#include "Buzzer.h"
+#include "LightSensor.h"
 
 
 uint8_t KeyNum;
 
 int main(void)
 {
-	
-	LED_Init();
-	KEY_Init();
-
+	BUZZER_Init();
+	LigthSensor_Init();
 	
 	while(1)
 	{
 	
-		
-		KeyNum = Key_GetNum();
-		if(KeyNum == 1)
+		if(GetLightSensor())
 		{
-			LED1_Turn();
+			BUZZER_ON();
 		}
-		
-		if(KeyNum == 2)
+		else
 		{
-			LED3_Turn();
+			BUZZER_OFF();
 		}
-		
 		
 	}
 }
